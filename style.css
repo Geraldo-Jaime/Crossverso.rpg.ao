@@ -1,0 +1,510 @@
+/* Estilos Gerais */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Chalter, fantasy;
+    background-color: #ffffff; /* Fundo branco como na imagem principal */
+}
+
+/* --- ESTILOS DO CABEÇALHO (HEADER) --- */
+.app-header {
+    background-color: #000000;
+    height: 120px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    position: fixed; /* Fixa no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    border-bottom: 10px solid #333;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text-container {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-family: 'Impact', sans-serif; /* Fonte grossa similar à imagem */
+    margin-bottom: -50px;
+    letter-spacing: 1px;
+}
+
+.logo-top {
+    font-size: 35px;
+    color: #ffffff;
+    text-shadow: 
+        -2px -2px 0 #333,  
+         2px -2px 0 #333,
+        -2px  2px 0 #333,
+         2px  2px 0 #333;/* Efeito de sombra/contorno */
+    line-height: 1px;
+}
+
+.logo-bottom {
+    display: flex;
+    align-items: center;
+}
+
+.logo-rpg {
+    font-size: 30px;
+    color: #ffffff;
+    margin-right: 5px;
+    line-height: 1;
+    
+    /* TRUQUE DO CONTORNO COMPLETO:
+       4 sombras posicionadas nos 4 cantos para simular uma borda */
+    text-shadow: 
+        -2px -2px 0 #333,  
+         2px -2px 0 #333,
+        -2px  2px 0 #333,
+         2px  2px 0 #333;
+}
+
+.mask-icon {
+    height: 75px;
+    width: auto;
+    /* Caso não tenha imagem, isto simula o espaço */
+    display: inline-block;
+
+}
+
+.vertical-divider {
+    height: 50px;
+    width: 3px;
+    background-color: white;
+    margin-left: 22px;
+    margin-right: 10px;
+    transform: skew(-15deg); /* Inclina levemente a linha se desejar */
+}
+
+/* Ícones da Direita */
+.header-right {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border: 3px solid #333; /* Borda grossa escura */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.icon-circle svg {
+    fill: #333; /* Cor do ícone dentro do círculo */
+}
+
+/* Ajuste do Container Principal para não ficar escondido pelo Header */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.main-content {
+    margin-top: 80px; /* Mesma altura do header para não sobrepor */
+    height: calc(100% - 80px);
+}
+/* --- MANTENHA O RESTO DO SEU CSS ANTIGO ABAIXO DAQUI --- */
+/* (Copie aqui os estilos de input, botões, loader do arquivo anterior) */
+
+/* Estilo para a imagem da página inicial */
+.logo-principal {
+    width: 200px;       /* Tamanho base da imagem */
+    height: auto;       /* Mantém a proporção */
+    margin-bottom: -50px;/* Espaço entre a imagem e o texto */
+    display: block;     /* Garante comportamento de bloco */
+}
+
+h1 { font-size: 3em; margin-bottom: 0.2em; }
+p { font-size: 1.5em; color: #666; margin-top: 0; }
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+.btn:hover { background-color: #45a049; }
+/* ... restante do CSS do login ... */
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Estilos Gerais */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-seri;
+    background-color: #f0f2f5;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+}
+
+p {
+    font-size: 1.5em;
+    color: #666;
+    margin-top: 0;
+}
+
+/* --- ESTILOS DOS CAMPOS DE PREENCHIMENTO (AS CAIXAS) --- */
+/* Aqui aumentamos especificamente as caixas de Nome, Avatar, Telefone e Senha */
+.input, 
+input[type="text"], 
+input[type="password"], 
+input[type="tel"], 
+input[type="number"], 
+input[type="email"],
+select {
+    width: 100%;             /* Ocupa a largura toda disponível */
+    padding: 10px;           /* AQUI ESTÁ O SEGREDO: Aumenta a altura interna da caixa */
+    margin-bottom: 10px;     /* Mais espaço entre uma caixa e outra */
+    border-radius: 10px;     /* Cantos mais arredondados */
+    border: 1px solid #ccc;
+    font-size: 19px;         /* Letra grande para ser fácil de ler */
+    background-color: #ffffff;
+    box-sizing: border-box;  /* Garante que não sai para fora do ecrã */
+    height: auto;            /* Deixa a altura ajustar-se ao padding grande */
+}
+
+/* Foco: Quando clicas na caixa, ela muda de cor */
+.input:focus, 
+input:focus {
+    border-color: #FFE70C;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* --- ESTILOS DO FORMULÁRIO --- */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px; /* Aumentei um pouco a largura máxima do formulário */
+    margin: 0 auto;
+}
+/* --- ESTILO PARA A CAIXA FUNDIDA (Input Combinado) --- */
+.input-combinado {
+    display: flex;             /* Coloca os itens lado a lado */
+    align-items: center;       /* Alinha verticalmente ao centro */
+    width: 100%;
+    border: 1px solid #ccc;    /* A borda fica aqui, na caixa de fora */
+    border-radius: 10px;       /* Cantos arredondados */
+    background-color: #fff;
+    margin-bottom: 25px;       /* Espaço para o próximo campo */
+    padding: 5px;              /* Um pequeno espaço interno */
+    box-sizing: border-box;
+}
+
+/* Quando clicamos em qualquer parte da caixa, a borda muda de cor */
+.input-combinado:focus-within {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* --- ESTILO DO SELETOR DE PAÍS --- */
+.select-pais {
+    border: none;              /* Remove a borda individual */
+    background-color: transparent;
+    font-size: 19px;
+    padding: 15px 5px 15px 15px; /* Ajuste do espaço */
+    outline: none;             /* Remove a linha azul ao clicar */
+    cursor: pointer;
+    width: auto;               /* Largura automática baseada no conteúdo */
+    border-right: 1px solid #ddd; /* Uma linha fina para separar do número */
+    border-radius: 10px 0 0 10px; /* Arredonda só a esquerda */
+}
+
+/* --- ESTILO DO INPUT DE NÚMERO --- */
+.input-telefone {
+    border: none;              /* Remove a borda individual */
+    background-color: transparent;
+    font-size: 19px;
+    padding: 15px;
+    flex-grow: 1;              /* Ocupa todo o espaço restante */
+    outline: none;             /* Remove a linha azul ao clicar */
+    border-radius: 0 10px 10px 0; /* Arredonda só a direita */
+    width: 100%;
+}
+/* --- ESTILOS DOS BOTÕES --- */
+.botoes-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 32px;      /* Botões também ficaram maiores */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 150px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn-secundario {
+    background-color: #008CBA;
+}
+
+.btn-secundario:hover {
+    background-color: #007bb5;
+}
+
+/* Botão de Enviar (Criar Conta / Entrar) */
+.btn-submit {
+    width: 100%;
+    padding: 22px;           /* Botão de enviar bem grande */
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Estilos Extras (Loading e Ícone) */
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #008FFF;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.profile-icon {
+    width: 120px;
+    height: 120px;
+    background-color: #e0e0e0;
+    border: 4px solid #ccc;
+    border-radius: 50%;
+    margin-bottom: -5px;
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA A PÁGINA INICIAL (TEMA DARK) --- */
+
+/* 1. Fundo Preto */
+body.tema-dark {
+    background-color: #000000;
+    color: #ffffff; /* Texto geral branco */
+}
+
+/* 2. Título com Contorno Cinzento */
+body.tema-dark h1 {
+    color: #ffffff;
+    line-height: 1; /* Garante que as sombras não cortem */
+    /* Contorno completo cinzento (igual à lógica do header) */
+    text-shadow: 
+        -2px -2px 0 #808080,  
+         2px -2px 0 #808080,
+        -2px  2px 0 #808080,
+         2px  2px 0 #808080;
+}
+
+/* Ajuste da cor do subtítulo para ser visível no preto */
+body.tema-dark p {
+    color: #cccccc; 
+}
+
+/* 3. Botão "Criar Conta" (Branco com contorno preto) */
+body.tema-dark .btn-criar {
+    background-color: #ffffff;
+    color: #000000; /* Texto preto */
+    border: 3px solid #808080; /* Contorno preto */
+    font-weight: bold;
+}
+
+/* Efeito ao passar o rato (opcional) */
+body.tema-dark .btn-criar:hover {
+    background-color: #e6e6e6;
+}
+
+/* 4. Botão "Iniciar Sessão" (Preto com contorno branco) */
+body.tema-dark .btn-entrar {
+    background-color: #000000;
+    color: #ffffff; /* Texto branco */
+    border: 3px solid #ffffff; /* Contorno branco */
+    font-weight: bold;
+}
+
+/* Efeito ao passar o rato (opcional) */
+body.tema-dark .btn-entrar:hover {
+    background-color: #333333;
+}
+
+
+/* --- ESTILOS DO TEMA DARK (ATUALIZADO PARA TODAS AS PÁGINAS) --- */
+
+/* 1. Fundo e Texto Base */
+body.tema-dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* 2. Títulos (H1 e H2) com Contorno Cinzento */
+body.tema-dark h1, 
+body.tema-dark h2 {
+    color: #000000;
+    line-height: 1.2;
+    text-shadow: 
+        -2px -2px 0 #FFFFFF,  
+         2px -2px 0 #FFFFFF,
+        -2px  2px 0 #FFFFFF,
+         2px  2px 0 #FFFFFF;
+}
+
+/* Texto secundário */
+body.tema-dark p {
+    color: #cccccc;
+}
+
+/* 3. Inputs e Formulários no Tema Dark */
+/* Garante que as caixas continuam brancas com texto preto para contraste */
+body.tema-dark input, 
+body.tema-dark select,
+body.tema-dark .input-combinado {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #cccccc; /* Borda suave */
+}
+
+body.tema-dark .input-telefone,
+body.tema-dark .select-pais {
+    color: #000000; /* Texto preto dentro do combinado */
+}
+
+/* 4. Botão Principal de Enviar (Nos formulários) */
+/* Vamos usar o estilo BRANCO (igual ao "Criar Conta") para destaque */
+body.tema-dark .btn-submit {
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #ffff; /* Borda preta */
+    font-weight: bold;
+}
+body.tema-dark .btn-submit:hover {
+    background-color: #e6e6e6;
+}
+
+/* --- ADICIONE ISTO AO FINAL DO SEU STYLE.CSS --- */
+
+/* --- ATUALIZAÇÃO PARA BORDAS PERFEITAS --- */
+
+body.tema-dark h1, 
+body.tema-dark #avatar-name {
+    /* Define a cor de preenchimento da letra (ex: branco) */
+    color: #000000 !important; 
+    
+    /* AQUI ESTÁ O SEGREDO: */
+    /* Cria uma borda sólida de 2px cinzenta à volta da letra */
+    -webkit-text-stroke: 4px #FFFFFF !important; 
+    
+    /* Remove a sombra antiga que causava os buracos */
+    text-shadow: none !important; 
+    
+    /* (Opcional) Garante que a borda não "coma" a letra por dentro */
+    paint-order: stroke fill; 
+}
+
+/* 2. Estilo do texto "Em análise..." */
+body.tema-dark .status-message {
+    color: #CCCCCC;
+    /* Cor da Letra: CINZA CLARO */
+    font-weight: normal;
+    text-shadow: none;
+    /* Remove sombras se houver */
+    margin-bottom: 50px;
+    /* Ajuste de espaço */
+}
+
+/* 3. Estilo Específico do Botão VOLTAR */
+body.tema-dark .btn-voltar {
+    background-color: #000000;
+    /* Fundo do botão: PRETO */
+    color: #FFFFFF;
+    /* Cor do texto: BRANCO */
+    border: 3px solid #FFFFFF;
+    /* Cor da Borda: VERMELHO */
+    font-weight: bold;
+}
+/* --- BOTÃO ESPECÍFICO DA TELA "CONCLUÍDO" --- */
+
+/* Usamos #message-container antes do .btn para garantir 
+   que a mudança só acontece dentro desse bloco específico */
+#message-container .btn {
+    background-color: #000000; /* Fundo Preto */
+    border: 3px solid #ffffff; /* Borda Branca */
+    color: #ffffff;            /* Texto Branco */
+    font-weight: bold;         /* Texto mais forte */
+}
+
+/* Efeito ao passar o rato (hover) apenas neste botão */
+#message-container .btn:hover {
+    background-color: #333333; /* Cinza escuro */
+}

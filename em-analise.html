@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta em Análise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="tema-dark">
+
+    <div class="container">
+        <!-- Ícone de Perfil -->
+        <div class="profile-icon"></div>
+        
+        <!-- AQUI VAI APARECER O NOME DO AVATAR -->
+        <h2 id="avatar-name">Carregando...</h2>
+        
+        <p class="status-message">A sua conta está em análise.</p>
+        
+        <a href="iniciar-sessao.html" class="btn btn-voltar">Sair</a>
+    </div>
+
+    <script>
+        // Quando a página carregar
+        window.onload = function() {
+            // 1. Olha para o link lá em cima (URL)
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 2. Procura por ?avatar=Nome
+            const avatarName = urlParams.get('avatar');
+            
+            // 3. Se encontrar, escreve na tela. Se não, escreve Visitante.
+            if (avatarName && avatarName !== "undefined" && avatarName !== "null") {
+                document.getElementById('avatar-name').textContent = avatarName;
+            } else {
+                document.getElementById('avatar-name').textContent = "Visitante";
+            }
+        };
+    </script>
+</body>
+</html>

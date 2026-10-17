@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Conta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="tema-dark">
+
+    <!-- Secção do Formulário -->
+    <div id="form-container" class="container">
+        <h1>Nova Conta</h1>
+        <form id="creation-form">
+            <!-- ADICIONEI IDs PARA O JAVASCRIPT LER -->
+            <input type="text" id="input-nome" placeholder="Nome próprio" required>
+            <input type="text" id="input-avatar" placeholder="Nome do Avatar" required>
+            
+            <select id="select-genero" required>
+                <option value="" disabled selected>Selecione o Gênero</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="outro">Outro</option>
+            </select>
+            
+            <div class="input-combinado">
+                <select id="select-pais" class="select-pais" required>
+                    <option value="+244">🇦🇴 +244</option>
+                    <option value="+351">🇵🇹 +351</option>
+                    <option value="+55">🇧🇷 +55</option>
+                    <option value="+258">🇲🇿 +258</option>
+                    <option value="+238">🇨🇻 +238</option>
+                </select>
+                
+                <input type="tel" id="input-telefone" class="input-telefone" placeholder="9xx xxx xxx" 
+                       pattern="[0-9]{9}" 
+                       title="Insira 9 dígitos"
+                       maxlength="9"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                       required>
+            </div>
+
+            <input type="password" id="input-pass" placeholder="Criar uma Palavra passe" required>
+            <input type="password" id="input-confirm" placeholder="Confirmar Palavra passe" required>
+            
+            <button type="submit" class="btn btn-submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Secção de Carregamento -->
+    <div id="loading-container" class="container" style="display: none;">
+        <div class="loader"></div>
+        <p>A gravar os dados no servidor...</p>
+    </div>
+
+    <script>
+        document.getElementById('creation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // 1. Pegar os valores
+            const nome = document.getElementById('input-nome').value;
+            const avatar = document.getElementById('input-avatar').value;
+            const genero = document.getElementById('select-genero').value;
+            const pais = document.getElementById('select-pais').value;
+            const telefone = document.getElementById('input-telefone').value;
+            const pass = document.getElementById('input-pass').value;
+            const confirm = document.getElementById('input-confirm').value;
+
+            // 2. VALIDAÇÃO DE SENHA (Onde o seu código falhava)
+            if (pass !== confirm) {
+                alert("ERRO: As palavras-passe não coincidem!");
+                return; // O código PARA aqui e não envia nada
+            }
+
+            // 3. Esconder form e mostrar loading
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('loading-container').style.display = 'flex';
+
+            // 4. Preparar dados para enviar
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('avatar', avatar);
+            formData.append('genero', genero);
+            formData.append('pais', pais);
+            formData.append('telefone', telefone);
+            formData.append('senha', pass);
+
+            // 5. Enviar para o PHP
+            fetch('registro.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                setTimeout(function() { // Pequeno delay visual
+                    if (data.trim() === "sucesso") {
+                        // Redireciona para a página de análise com o nome do avatar
+                        window.location.href = `em-analise.html?avatar=${encodeURIComponent(avatar)}`;
+                    } else if (data.includes("erro_existe")) {
+                        alert("Este número de telefone já está registado!");
+                        resetForm();
+                    } else {
+                        alert("Erro no servidor: " + data);
+                        resetForm();
+                    }
+                }, 1500);
+            })
+            .catch(error => {
+                alert("Erro de conexão.");
+                resetForm();
+            });
+        });
+
+        function resetForm() {
+            document.getElementById('loading-container').style.display = 'none';
+            document.getElementById('form-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sessão</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="tema-dark">
+
+    <div id="form-container" class="container">
+        <h1>Iniciar Sessão</h1>
+        <form id="login-form">
+            <input type="tel" id="input-phone" placeholder="Número de telefone" required>
+            <input type="password" id="input-pass" placeholder="Palavra passe" required>
+            <button type="submit" class="btn btn-submit">Iniciar</button>
+        </form>
+    </div>
+
+    <div id="loading-container" class="container" style="display: none;">
+        <div class="loader"></div>
+        <p id="loading-text">A conectar ao CrosVerso...</p>
+    </div>
+
+    <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // 1. Limpeza dos dados
+        const phoneVal = document.getElementById('input-phone').value.replace(/\s/g, '');
+        const passVal = document.getElementById('input-pass').value.trim();
+        
+        // 2. Animação de Loading
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('loading-container').style.display = 'flex';
+        
+        // 3. Preparar envio
+        const formData = new FormData();
+        formData.append('telefone', phoneVal);
+        formData.append('senha', passVal);
+        
+        // 4. Enviar e Receber JSON
+        fetch('login.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Agora lemos JSON, não texto
+            .then(data => { .then(data => {
+    setTimeout(function() {
+        // 1. Se for ADMINISTRADOR
+        if (data.status === "admin") {
+            window.location.replace('admin.php');
+        }
+        // 2. Se for PLAYER JÁ APROVADO (Vai para o Jogo)
+        else if (data.status === "aprovado") {
+            window.location.href = 'pagina-principal.html';
+        }
+        // 3. Se for PLAYER PENDENTE (Vai para Análise)
+        else if (data.status === "analise") {
+            const nomeAvatar = encodeURIComponent(data.avatar);
+            window.location.href = `em-analise.html?avatar=${nomeAvatar}`;
+        }
+        // 4. Se deu erro
+        else {
+            alert(data.mensagem || "Erro ao entrar.");
+            resetForm();
+        }
+    }, 1000);
+})
+                setTimeout(function() {
+                    if (data.status === "admin") {
+                        // Se for Admin
+                        window.location.replace('admin.html');
+                        
+                    } else if (data.status === "player") {
+                        // Se for Player, pega o nome do avatar que veio do PHP
+                        const nomeAvatar = encodeURIComponent(data.avatar);
+                        // Envia para a página de análise
+                        window.location.href = `em-analise.html?avatar=${nomeAvatar}`;
+                        
+                    } else {
+                        // Se deu erro
+                        alert(data.mensagem || "Erro desconhecido.");
+                        resetForm();
+                    }
+                }, 1000);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Erro de conexão. Verifique a internet ou o arquivo PHP.");
+                resetForm();
+            });
+    });
+
+    function resetForm() {
+        document.getElementById('loading-container').style.display = 'none';
+        document.getElementById('form-container').style.display = 'block';
+    }
+    </script>
+</body>
+</html><!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar Sessão</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="tema-dark">
+
+    <div id="form-container" class="container">
+
+        <h1>Iniciar Sessão</h1>
+
+        <form id="login-form">
+
+            <input type="tel" id="input-phone" placeholder="Número de telefone" required>
+
+            <input type="password" id="input-pass" placeholder="Palavra passe" required>
+
+            <button type="submit" class="btn btn-submit">Iniciar</button>
+
+        </form>
+
+    </div>
+
+    <div id="loading-container" class="container" style="display: none;">
+
+        <div class="loader"></div>
+
+        <p id="loading-text">A conectar ao CrosVerso...</p>
+
+    </div>
+
+    <script>
+
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+
+        event.preventDefault();
+
+        
+
+        // 1. Limpeza dos dados
+
+        const phoneVal = document.getElementById('input-phone').value.replace(/\s/g, '');
+
+        const passVal = document.getElementById('input-pass').value.trim();
+
+        
+
+        // 2. Animação de Loading
+
+        document.getElementById('form-container').style.display = 'none';
+
+        document.getElementById('loading-container').style.display = 'flex';
+
+        
+
+        // 3. Preparar envio
+
+        const formData = new FormData();
+
+        formData.append('telefone', phoneVal);
+
+        formData.append('senha', passVal);
+
+        
+
+        // 4. Enviar e Receber JSON
+
+        fetch('login.php', {
+
+                method: 'POST',
+
+                body: formData
+
+            })
+
+            .then(response => response.json()) // Lê a resposta como JSON
+
+            .then(data => {
+
+                // Pequena pausa para ver a animação
+
+                setTimeout(function() {
+
+                    
+
+                    // CASO 1: ADMINISTRADOR
+
+                    if (data.status === "admin") {
+
+                        // Muito importante: Verifique se o arquivo se chama admin.php
+
+                        window.location.replace('admin.php');
+
+                    } 
+
+                    // CASO 2: JOGADOR JÁ APROVADO
+
+                    else if (data.status === "aprovado") {
+
+                        window.location.href = 'pagina-principal.html';
+
+                    } 
+
+                    // CASO 3: JOGADOR NOVO (PENDENTE)
+
+                    else if (data.status === "analise") {
+
+                        // Envia o nome do avatar para a página de análise
+
+                        const nomeAvatar = encodeURIComponent(data.avatar);
+
+                        window.location.href = `em-analise.html?avatar=${nomeAvatar}`;
+
+                    } 
+
+                    // CASO 4: ERRO (Senha errada ou telefone não existe)
+
+                    else {
+
+                        alert(data.mensagem || "Erro ao entrar.");
+
+                        // Volta a mostrar o formulário
+
+                        document.getElementById('loading-container').style.display = 'none';
+
+                        document.getElementById('form-container').style.display = 'block';
+
+                    }
+
+                }, 1000);
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+                alert("Erro de conexão. Verifique se o arquivo login.php existe.");
+
+                document.getElementById('loading-container').style.display = 'none';
+
+                document.getElementById('form-container').style.display = 'block';
+
+            });
+
+    });
+
+    </script>
+
+</body>
+
+</html>
